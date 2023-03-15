@@ -33,7 +33,7 @@ if [ "$GH_PAGES_CNAME" != "none" ]
 then
     echo "$GH_PAGES_CNAME" > CNAME
 fi
-git add .
+git add output
 
 echo -n 'Files to Commit:' && ls -l | wc -l
 git commit -m "[ci skip] Automated deployment to GitHub Pages on $(date +%s%3N)"
