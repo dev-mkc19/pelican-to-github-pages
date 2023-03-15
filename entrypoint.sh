@@ -19,7 +19,7 @@ if [ -n "$PELICAN_THEME_FOLDER" ]; then
 fi
 
 echo 'Building site 👷 '
-pelican ${PELICAN_CONTENT_FOLDER:=content} -o output -s ${PELICAN_CONFIG_FILE:=publishconf.py}
+pelican ${PELICAN_CONTENT_FOLDER:=content} -o docs -s ${PELICAN_CONFIG_FILE:=publishconf.py}
 
 echo 'Publishing to GitHub Pages 📤 '
 git config --global --add safe.directory /github/workspace
@@ -33,7 +33,7 @@ if [ "$GH_PAGES_CNAME" != "none" ]
 then
     echo "$GH_PAGES_CNAME" > CNAME
 fi
-git add output
+git add .
 
 echo -n 'Files to Commit:' && ls -l | wc -l
 git commit -m "[ci skip] Automated deployment to GitHub Pages on $(date +%s%3N)"
