@@ -23,7 +23,7 @@ pelican ${PELICAN_CONTENT_FOLDER:=content} -o docs -s ${PELICAN_CONFIG_FILE:=pub
 
 echo 'Publishing to GitHub Pages 📤 '
 git config --global --add safe.directory /github/workspace
-pushd output
+pushd docs
 git init
 git remote add deploy "$remote_repo"
 git checkout $remote_branch || git checkout --orphan $remote_branch
