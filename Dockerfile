@@ -13,10 +13,17 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -qy git curl bash
+    && apt-get install --no-install-recommends -qy git curl bash \
+    build-essential pkg-config libssl-dev
 
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 RUN apt-get install -y nodejs
+
+# Install Rust to enable cargo package manager
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+# install Stork
+RUN cargo install stork-search --locked
 
 COPY entrypoint.sh /entrypoint.sh
 RUN ["chmod", "+x", "/entrypoint.sh"]
